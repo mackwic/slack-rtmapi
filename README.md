@@ -12,10 +12,11 @@ HOW TO USE
 ```ruby
 require 'slack-rtmapi'
 
-url = SlackRTM.get_url token: 'xxx'
+url = SlackRTM.get_url token: 'xxx' # get one on https://api.slack.com/web#basics
 client = SlackRTM::Client.new websocket_url: url
 
 client.on :message {|data| p data}
+client.send {type: 'hello'}
 
 client.main_loop
 assert false # never ending loop

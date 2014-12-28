@@ -73,9 +73,7 @@ module SlackRTM
           @callbacks[:message].call data
         end
       end
-
       @driver.start
-
       @has_been_init = true
     end
 
