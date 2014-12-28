@@ -1,8 +1,8 @@
 
-require_relative "slack-rtmapi/version"
+require_relative "lib/slack-rtmapi/version"
 
 Gem::Specification.new do |s|
-  s.name = 'slac-rtmapi'
+  s.name = 'slack-rtmapi'
   s.version = SlackRTM::VERSION
   s.authors = ["mackwic"]
   s.email = ["mackwic@gmail.com"]
@@ -14,7 +14,7 @@ Minimal dependency. Works out of the box. Hackable. Composable.
   
 Oh, by the way, it implements very well the Slack API."
   s.homepage = "https://github.com/mackwic/slack-rtmapi"
-  s.licence = "GPLv3"
+  s.license = "GPLv3"
 
   s.files = `git ls-files -z`.split("\x0")
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
