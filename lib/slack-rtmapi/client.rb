@@ -47,9 +47,9 @@ module SlackRTM
 
       internalWrapper = (Struct.new :url, :socket do
         def write(*args)
-          @socket.write(*args)
+          self.socket.write(*args)
         end
-      end).new @url, @socket
+      end).new @url.to_s, @socket
 
       # this, also, is costly and blocking
       @driver = WebSocket::Driver.client internalWrapper
@@ -60,19 +60,21 @@ module SlackRTM
         end
       end
 
-      driver.on :error do |event|
+      @driver.on :error do |event|
         @connected = false
         unless @callbacks[:error].nil?
           @callbacks[:error].call
         end
       end
 
-      driver.on :message do |event|
+      @driver.on :message do |event|
         data = JSON.parse event.data
         unless @callbacks[:message].nil?
           @callbacks[:message].call data
         end
       end
+
+      @driver.start
 
       @has_been_init = true
     end
@@ -85,7 +87,7 @@ module SlackRTM
     def inner_loop
       return if @stop
       data = @socket.readpartial 4096
-      return if line.nil? or line.empty?
+      return if data.nil? or data.empty?
 
       @driver.parse data
       @msg_queue.each {|msg| driver.text msg}
@@ -93,7 +95,7 @@ module SlackRTM
     end
 
     # A dumb simple main loop.
-    def main_lopp
+    def main_loop
       init
       loop do
         inner_loop

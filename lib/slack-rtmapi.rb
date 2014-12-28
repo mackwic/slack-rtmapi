@@ -1,3 +1,4 @@
+require_relative "slack-rtmapi/client"
 require_relative "slack-rtmapi/version"
 
 require 'JSON'
@@ -5,7 +6,7 @@ require 'net/http'
 
 module SlackRTM
 
-  def get_url(options)
+  def self.get_url(options)
     if options[:token].nil?
       raise ArgumentError.new "#get_url needs a valid slack token"
     end
