@@ -23,7 +23,9 @@ client.send {type: 'hello'}
 client.main_loop
 assert false # never ending loop
 ```
-Slack-rtmapi is very configurable. More documentation will come soon (especially Rails integration), with helpers for integrations with the usual engines (EventMachine and Rack are planned, maybe Celluloid).
+Slack-rtmapi is very hackable and configurable. More documentation will come soon (especially Rails integration), with helpers for integrations with the usual engines (EventMachine and Rack are planned, maybe Celluloid).
+
+As always, pull request welcome, we are very contributor friendly.
 
 For more informations about the Slack Real Time API, please check https://api.slack.com/rtm
 
