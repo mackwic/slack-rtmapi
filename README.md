@@ -9,6 +9,8 @@ If you need a licence, please contact me and I will respond within the 24 hours.
 HOW TO USE
 ----------
 
+First, install the gem: `gem install slack-rtmapi`.
+
 ```ruby
 require 'slack-rtmapi'
 
@@ -21,6 +23,7 @@ client.send {type: 'hello'}
 client.main_loop
 assert false # never ending loop
 ```
+Slack-rtmapi is very configurable. More documentation will come soon (especially Rails integration), with helpers for integrations with the usual engines (EventMachine and Rack are planned, maybe Celluloid).
 
 For more informations about the Slack Real Time API, please check https://api.slack.com/rtm
 
