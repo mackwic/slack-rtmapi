@@ -23,7 +23,7 @@ client.send {type: 'hello'}
 client.main_loop
 assert false # never ending loop
 ```
-Slack-rtmapi is very hackable and configurable. More documentation will come soon (especially Rails integration), with helpers for integrations with the usual engines (EventMachine and Rack are planned, maybe Celluloid).
+Slack-rtmapi is very hackable and configurable. More documentation will come soon (especially Rails integration), with helpers for integrations with the usual engines (EventMachine and Rack are planned, maybe Celluloid).  
 Stay tuned and follow the ongoing [_Dead Simple_ serie](https://github.com/mackwic/slack-rtmapi/wiki) on the wiki !
 
 As always, pull request welcome, we are very contributor friendly.
