@@ -1,5 +1,5 @@
 
-require 'JSON'
+require 'json'
 require 'socket'
 require 'websocket/driver'
 
