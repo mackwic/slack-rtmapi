@@ -1,6 +1,8 @@
 slack-rtmapi
 ============
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mackwic/slack-rtmapi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 All you need to use the RTM api of Slack
 
 Please note that this gem is GPLv3. You *CAN'T* use it for proprietary software.
