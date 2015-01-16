@@ -1,7 +1,7 @@
 require_relative "slack-rtmapi/client"
 require_relative "slack-rtmapi/version"
 
-require 'JSON'
+require 'json'
 require 'net/http'
 
 module SlackRTM

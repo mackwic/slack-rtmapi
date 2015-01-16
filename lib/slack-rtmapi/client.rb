@@ -1,5 +1,5 @@
 
-require 'JSON'
+require 'json'
 require 'socket'
 require 'websocket/driver'
 
@@ -88,7 +88,7 @@ module SlackRTM
       return if data.nil? or data.empty?
 
       @driver.parse data
-      @msg_queue.each {|msg| driver.text msg}
+      @msg_queue.each {|msg| @driver.text msg}
       @msg_queue.clear
     end
 
