@@ -30,3 +30,9 @@ As always, pull request welcome, we are very contributor friendly.
 
 For more informations about the Slack Real Time API, please check https://api.slack.com/rtm
 
+Contributors
+------------
+- [mackwic](https://github.com/mackwic)
+- [zipkid](https://github.com/zipkid)
+
+
