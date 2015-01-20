@@ -20,6 +20,7 @@ class SlackRTM
       @msg_queue = conf[:msg_queue] || []
       @has_been_init = false
       @stop = false
+      @reading = false
     end
 
     VALID = [:open, :message, :error]
@@ -81,14 +82,22 @@ class SlackRTM
       @connected || false
     end
 
+    def read_socket
+      @reading = true
+      data = @socket.readpartial 4096
+      @driver.parse data if !data.nil? && !data.empty?
+      @reading = false
+    end
+
     # All the polling work is done here
     def inner_loop
       return if @stop
-      data = @socket.readpartial 4096
-      return if data.nil? or data.empty?
-
-      @driver.parse data
-      @msg_queue.each {|msg| @driver.text msg}
+      unless @reading
+        Thread.new do
+          read_socket
+        end
+      end
+      @msg_queue.each { |msg| @driver.text msg }
       @msg_queue.clear
     end
 
@@ -97,6 +106,7 @@ class SlackRTM
       init
       loop do
         inner_loop
+        sleep 0.5
       end
     end
 
