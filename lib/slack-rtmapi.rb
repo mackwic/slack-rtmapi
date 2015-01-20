@@ -35,6 +35,12 @@ class SlackRTM
   def client
     @client ||= SlackRTM::Client.new websocket_url: @websocket_url
   end
+
+  def channel_id(channel_name)
+    channels = @data['channels']
+    channel_data = channels.find { |channel| channel['name'] == channel_name }
+    channel_data['id'] unless channel_data.nil?
+  end
 end
 
 #
