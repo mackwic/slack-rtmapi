@@ -4,8 +4,7 @@ require 'json'
 require 'socket'
 require 'websocket/driver'
 
-module SlackRTM
-
+class SlackRTM
   class Client
     attr_accessor :stop
 
@@ -122,5 +121,5 @@ module SlackRTM
       end
     end
   end
-  
+
 end
