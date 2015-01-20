@@ -14,7 +14,6 @@ class SlackRTM
       else
         @url = init_url conf[:websocket_url]
       end
-
       @socket = conf[:socket]
       @driver = conf[:websocket_driver]
       @msg_queue = conf[:msg_queue] || []
@@ -34,7 +33,7 @@ class SlackRTM
     end
 
     def send(data)
-      data[:id] ||= SecureRandom.random_number 9999999
+      data[:id] ||= SecureRandom.random_number 9_999_999
       @msg_queue << data.to_json
     end
 

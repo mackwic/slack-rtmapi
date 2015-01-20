@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require_relative 'slack-rtmapi/client'
 require_relative 'slack-rtmapi/version'
 
