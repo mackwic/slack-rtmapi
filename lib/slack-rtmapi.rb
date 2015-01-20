@@ -1,5 +1,5 @@
-require_relative "slack-rtmapi/client"
-require_relative "slack-rtmapi/version"
+require_relative 'slack-rtmapi/client'
+require_relative 'slack-rtmapi/version'
 
 require 'json'
 require 'net/http'
