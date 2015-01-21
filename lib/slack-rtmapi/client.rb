@@ -83,21 +83,24 @@ class SlackRTM
 
     def read_socket
       @reading = true
-      data = @socket.readpartial 4096
-      @driver.parse data if !data.nil? && !data.empty?
+      tries = 2
+      begin
+        data = @socket.read_nonblock 4096
+      rescue OpenSSL::SSL::SSLErrorWaitReadable
+        tries -= 1
+        retry if tries > 0
+      end
+      @driver.parse data unless data.nil? || data.empty?
       @reading = false
     end
 
     # All the polling work is done here
     def inner_loop
       return if @stop
-      unless @reading
-        Thread.new do
-          read_socket
-        end
-      end
+      read_socket unless @reading
       @msg_queue.each { |msg| @driver.text msg }
       @msg_queue.clear
+      sleep 0.1
     end
 
     # A dumb simple main loop.
@@ -105,7 +108,6 @@ class SlackRTM
       init
       loop do
         inner_loop
-        sleep 0.5
       end
     end
 
