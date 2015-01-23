@@ -6,12 +6,9 @@ require_relative 'slack-rtmapi/version'
 require 'json'
 require 'net/http'
 
-#
-# SlackRTM
-#
 class SlackRTM
   attr_writer :client
-  attr_accessor :data
+  attr_accessor :rtm_state_data
   def self.get_url(options)
     if options[:token].nil?
       raise ArgumentError.new '#get_url needs a valid slack token'
@@ -29,8 +26,8 @@ class SlackRTM
   end
 
   def start_rtm
-    @data = SlackWebAPI.call(method: 'rtm.start', token: @token)
-    @websocket_url = URI(@data['url'])
+    @rtm_state_data = SlackWebAPI.call(method: 'rtm.start', token: @token)
+    @websocket_url = URI(@rtm_state_data['url'])
     client
   end
 
@@ -39,7 +36,7 @@ class SlackRTM
   end
 
   def channel_id(channel_name)
-    channels = @data['channels']
+    channels = @rtm_state_data['channels']
     channel_data = channels.find { |channel| channel['name'] == channel_name }
     channel_data['id'] unless channel_data.nil?
   end
