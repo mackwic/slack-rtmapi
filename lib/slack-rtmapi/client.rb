@@ -20,6 +20,7 @@ class SlackRTM
       @has_been_init = false
       @stop = false
       @reading = false
+      @callbacks = {}
     end
 
     VALID = [:open, :message, :error]
@@ -28,7 +29,6 @@ class SlackRTM
         raise ArgumentError.new "Client#on accept one of #{VALID.inspect}"
       end
 
-      @callbacks ||= {}
       @callbacks[type] = block
     end
 
@@ -63,7 +63,7 @@ class SlackRTM
       @driver.on :error do |event|
         @connected = false
         unless @callbacks[:error].nil?
-          @callbacks[:error].call
+          @callbacks[:error].call event.message
         end
       end
 
@@ -73,6 +73,13 @@ class SlackRTM
           @callbacks[:message].call data
         end
       end
+
+      @driver.on :close do |event|
+        unless @callbacks[:close].nil?
+          @callbacks[:close].call event.code, event.reason
+        end
+      end
+
       @driver.start
       @has_been_init = true
     end
