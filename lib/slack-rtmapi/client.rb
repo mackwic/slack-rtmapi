@@ -23,7 +23,7 @@ class SlackRTM
       @callbacks = {}
     end
 
-    VALID = [:open, :message, :error]
+    VALID = [:open, :message, :error, :close]
     def on(type, &block)
       unless VALID.include? type
         raise ArgumentError.new "Client#on accept one of #{VALID.inspect}"
