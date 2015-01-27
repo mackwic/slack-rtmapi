@@ -9,11 +9,8 @@ class SlackRTM
     attr_accessor :stop
 
     def initialize(conf = {})
-      if conf[:websocket_url].nil?
-        raise ArgumentError.new 'conf[:websocket_url] should be provided'
-      else
-        @url = init_url conf[:websocket_url]
-      end
+      @websocket_url = conf.fetch(:websocket_url)
+      @url = init_url @websocket_url
       @socket = conf[:socket]
       @driver = conf[:websocket_driver]
       @msg_queue = conf[:msg_queue] || []
